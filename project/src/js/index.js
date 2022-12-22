@@ -21,6 +21,7 @@ node_1.default.audioList.forEach(e => {
     e.preservesPitch = false;
 });
 const AllDraw = () => {
+    console.log("tlqkf?");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (const v of Object.values(node_1.default.nodes)) {
         v.drow();
@@ -54,5 +55,8 @@ const nodeMenuEvent = (e) => {
     nM.setTime();
 };
 canvas.addEventListener('click', nodeMenuEvent);
-requestAnimationFrame(AllDraw);
-console.log(style_css_1.default, ic_launcher_png_1.default, index_html_1.default);
+//requestAnimationFrame(AllDraw);
+setInterval(AllDraw, 10);
+console.log(style_css_1.default);
+console.log(ic_launcher_png_1.default);
+console.log(index_html_1.default);

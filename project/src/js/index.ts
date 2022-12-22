@@ -55,8 +55,13 @@ const nodeMenuEvent:(e:MouseEvent) => void = (e:MouseEvent) => {
     nM.position = {x:e.clientX, y:e.clientY};
     nM.Active = !nM.Active;
     nM.setTime();
+    
 }
 
 canvas.addEventListener('click', nodeMenuEvent);
-requestAnimationFrame(AllDraw);
-console.log(css, img, index);
+//requestAnimationFrame(AllDraw);
+setInterval(AllDraw, 10);
+
+console.log(css);
+console.log(img);
+console.log(index);
