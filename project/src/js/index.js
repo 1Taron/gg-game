@@ -21,7 +21,6 @@ node_1.default.audioList.forEach(e => {
     e.preservesPitch = false;
 });
 const AllDraw = () => {
-    console.log("tlqkf?");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (const v of Object.values(node_1.default.nodes)) {
         v.drow();
@@ -35,13 +34,13 @@ const nodeMenuEvent = (e) => {
     for (const v of Object.values(node_1.default.nodes)) {
         let tx = e.clientX - v.position.x;
         let ty = e.clientY - v.position.y;
-        if (tx > -50 && tx < 50 && ty > -50 && ty < 50) {
-            v.click();
-            return;
-        }
-        else if (v.activeMenu) {
+        if (v.activeMenu) {
             v.menuClick(tx, ty);
             v.activeMenu = false;
+            return;
+        }
+        else if (tx > -50 && tx < 50 && ty > -50 && ty < 50) {
+            v.click();
             return;
         }
     }
@@ -50,13 +49,20 @@ const nodeMenuEvent = (e) => {
         let ty = e.clientY - nM.position.y;
         nM.click(tx, ty);
     }
-    nM.position = { x: e.clientX, y: e.clientY };
-    nM.Active = !nM.Active;
-    nM.setTime();
+    else {
+        nM.position = { x: e.clientX, y: e.clientY };
+        nM.Active = !nM.Active;
+        nM.setTime();
+    }
 };
 canvas.addEventListener('click', nodeMenuEvent);
 //requestAnimationFrame(AllDraw);
 setInterval(AllDraw, 10);
+function Start() {
+    var _a;
+    (_a = node_1.default.startNode) === null || _a === void 0 ? void 0 : _a.play();
+}
 console.log(style_css_1.default);
 console.log(ic_launcher_png_1.default);
 console.log(index_html_1.default);
+console.log(Start);

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var interfaces;
 (function (interfaces) {
     interfaces.correction = 50;
+    interfaces.nodeid = "";
     interfaces.audioList = [
         document.createElement('audio'),
         document.createElement('audio'),
@@ -14,8 +15,6 @@ var interfaces;
         document.createElement('audio')
     ];
     interfaces.nodes = {};
-    class MenuUI {
-    }
-    interfaces.MenuUI = MenuUI;
+    interfaces.startNode = null;
 })(interfaces || (interfaces = {}));
 exports.default = interfaces;

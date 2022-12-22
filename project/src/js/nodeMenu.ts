@@ -15,6 +15,7 @@ class nodeMenu{
     position:{x:number,y:number} = {x:0,y:0};
     Active:boolean = false;
     ctx:CanvasRenderingContext2D;
+    sumsum: number = 0;
 
     constructor(ctx:CanvasRenderingContext2D){
         this.nodeMenuImgElement.src = nodeMenuImg;
@@ -23,13 +24,17 @@ class nodeMenu{
     
     node2:()=>void = ()=>{
         this.nodeMenuImgElement.src = nodeMenu2;
+        this.sumsum = 25;
     }
 
     node1:()=>void = ()=> {
         this.nodeMenuImgElement.src = nodeMenuImg;
+        this.sumsum = 0;
     }
 
     setTime:()=>void = ()=>{
+        this.node1();
+        this.bTime = 0;
         this.aTime = new Date().getTime();
     }
 
@@ -41,25 +46,27 @@ class nodeMenu{
             if(tt > 50) tt = 50;
         }
         if(dt > 150) dt = 150
-        this.ctx.drawImage(this.nodeMenuImgElement, this.position.x-75, this.position.y-75, dt+tt, dt+tt);
+        this.ctx.drawImage(this.nodeMenuImgElement, this.position.x-(75+this.sumsum), this.position.y-75-this.sumsum, dt+tt, dt+tt);
     }
     
     click:(x:number, y:number)=>void = (x:number, y:number)=>{
         console.log(x);
         console.log(y);
         if(this.bTime == 0){
-            if(y > 60 && y < 96 && x > 4 && x > 40){
+            if(y > 16 && y < 60 && x > -52 && x < -17){
                 console.log("논리 눌림");
                 this.bTime = new Date().getTime();
                 this.node2();
             }
-            else if(y > 41 && y < 81 && x > 52 && x < 81){
+            else if(y > -5 && y < 32 && x > -1 && x < 52){
                 console.log("사운드 눌림");
                 new soundBlock1(this.position.x, this.position.y, this.ctx);
+                this.Active = false;
             }
-            else if(y > 9 && y < 37 && x > 63 && x < 91){
+            else if(y > -58 && y < -29 && x > 15 && x < 63){
                 console.log("딜레이 눌림");
                 new delay(this.position.x, this.position.y, this.ctx);
+                this.Active = false;
             }
             else{
                 this.Active = false;
@@ -67,34 +74,40 @@ class nodeMenu{
         }
 
         else{
-            if(y > 77 && y < 124 && x > 66 && x < 109){
+            if(y > -21 && y < 20 && x > -30 && x < 8){
                 console.log("논리 눌림");
                 this.bTime = 0;
                 this.node1();
             }
-            else if(y > 59 && y< 98 && x > 124 && x < 166){
+            else if(y > -45 && y< -8 && x > 23 && x < 67){
                 new soundBlock1(this.position.x, this.position.y, this.ctx);
                 console.log("사운드 눌림");
+                this.Active = false;
             }
-            else if(y > 14 && y < 47 && x > 136 && x < 173){
+            else if(y > -80 && y < -50 && x > 37 && x < 69){
                 new delay(this.position.x, this.position.y, this.ctx);
                 console.log("딜레이 눌림");
+                this.Active = false;
             }
-            else if(y > 141 && y < 165 && x > 25 && x < 51){
+            else if(y > 34 && y < 59 && x > -79 && x < -48){
                 new not(this.position.x, this.position.y, this.ctx);
                 console.log("낫 눌림");
+                this.Active = false;
             }
-            else if(y > 149 && y < 190 && x > 61 && x < 90){
+            else if(y > 47 && y < 82 && x > -36 && x < -9){
                 new and(this.position.x, this.position.y, this.ctx);
                 console.log("앤드 눌림");
+                this.Active = false;
             }
-            else if(y > 152 && y < 190 && x > 96 && x < 124){
+            else if(y > 48 && y < 81 && x > -6 && x < 23){
                 new or(this.position.x, this.position.y, this.ctx);
                 console.log("오어 눌림");
+                this.Active = false;
             }
-            else if(y > 143 && y < 167 && x > 132 && x < 199){
+            else if(y > 37 && y < 59 && x > 29 && x < 66){
                 new xor(this.position.x, this.position.y, this.ctx);
                 console.log("엑소 눌림");
+                this.Active = false;
             }
             else{
                 this.Active = false;

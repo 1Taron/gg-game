@@ -34,16 +34,16 @@ const nodeMenuEvent:(e:MouseEvent) => void = (e:MouseEvent) => {
     for(const v of Object.values(interfaces.nodes)){
         let tx:number = e.clientX - v.position.x;
         let ty:number = e.clientY - v.position.y;
-
-        if(tx > -50 && tx < 50 && ty > -50 && ty < 50){
-            v.click();
-            return;
-        }
-        else if(v.activeMenu){
+        if(v.activeMenu){
             v.menuClick(tx, ty);
             v.activeMenu = false;
             return;
         }
+        else if(tx > -50 && tx < 50 && ty > -50 && ty < 50){
+            v.click();
+            return;
+        }
+
     }
 
     if(nM.Active){
@@ -64,6 +64,11 @@ canvas.addEventListener('click', nodeMenuEvent);
 //requestAnimationFrame(AllDraw);
 setInterval(AllDraw, 10);
 
+function Start(){
+    interfaces.startNode?.play();
+}
+
 console.log(css);
 console.log(img);
 console.log(index);
+console.log(Start);

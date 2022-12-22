@@ -30,6 +30,7 @@ class soundBlock1 {
                     this.context.strokeStyle = 'blue';
                 this.context.moveTo(dstart.x, dstart.y);
                 this.context.lineTo(endpoint.x, endpoint.y);
+                this.context.stroke();
             }
             this.context.closePath();
         };
@@ -64,42 +65,67 @@ class soundBlock1 {
             }, this.delay);
         };
         this.click = () => {
-            this.activeMenu = !this.activeMenu;
+            console.log(node_1.default.nodeid, this.id);
+            if (node_1.default.nodeid != "") {
+                if (node_1.default.nodeid == this.id) {
+                    node_1.default.nodeid = "";
+                }
+                else {
+                    console.log(this);
+                    let t = node_1.default.nodes[node_1.default.nodeid];
+                    for (let i = 0; i < this.inputCount; i++) {
+                        if (this.inputNode[i][0] == null) {
+                            this.inputNode[i][0] = node_1.default.nodeid;
+                            t.nextNode.push([this.id, true]);
+                            break;
+                        }
+                    }
+                    node_1.default.nodeid = "";
+                }
+            }
+            else
+                this.activeMenu = !this.activeMenu;
         };
         this.activeMenu = false;
         this.menuClick = (x, y) => {
-            if (x > 5 && x < 40 && y > 5 && y < 25) {
+            console.log(x, y);
+            if (x > 0 && x < 100 && y > 0 && y < 25) {
                 node_1.default.nodeid = this.id;
             }
-            else if (x > 5 && x < 40 && y > 25 && y < 40) {
+            else if (x > 0 && x < 100 && y > 25 && y < 70) {
                 this.inputNode.forEach(e => {
                     if (e[0] != null)
                         node_1.default.nodes[e[0]].nextNode.filter(e2 => {
                             return e2[0] != this.id;
                         });
                 });
-                this.inputNode = [];
+                this.inputNode = [[null, true], [null, true]];
             }
-            else if (x > 5 && x < 40 && y > 45 && y < 60) {
+            else if (x > 0 && x < 100 && y > 70 && y < 120) {
                 let temp = prompt("시간을 입력해주세요");
                 if (temp != null)
                     this.delay = Number.parseInt(temp);
             }
-            else if (x > 5 && x < 40 && y > 65 && y < 80) {
+            else if (x > 0 && x < 100 && y > 120 && y < 160) {
                 let temp = prompt("피치를 입력해주세요");
                 if (temp != null)
                     this.soundRate = Number.parseInt(temp);
+            }
+            else if (x > 0 && x < 100 && y > 160 && y < 200) {
+                this.play();
             }
         };
         this.menuDraw = () => {
             this.context.beginPath();
             this.context.fillStyle = 'white';
-            this.context.fillRect(this.position.x, this.position.y, 50, 100);
-            this.context.fillStyle = 'blcak';
-            this.context.fillText("노드 연결", this.position.x + 5, this.position.y + 5);
-            this.context.fillText("연결 해제", this.position.x + 5, this.position.y + 25);
-            this.context.fillText("시간 설정", this.position.x + 5, this.position.y + 45);
-            this.context.fillText("피치 설정", this.position.x + 5, this.position.y + 65);
+            this.context.fillRect(this.position.x, this.position.y, 100, 200);
+            this.context.fillStyle = 'black';
+            this.context.font = '20px sans-serif';
+            this.context.fillText("노드 연결", this.position.x + 5, this.position.y + 20);
+            this.context.fillText("연결 해제", this.position.x + 5, this.position.y + 60);
+            this.context.fillText("시간 설정", this.position.x + 5, this.position.y + 100);
+            this.context.fillText("피치 설정", this.position.x + 5, this.position.y + 140);
+            this.context.fillText("시작", this.position.x + 5, this.position.y + 180);
         };
         this.id = crypto.randomUUID();
         node_1.default.nodes[this.id] = this;
@@ -110,6 +136,13 @@ class soundBlock1 {
         this.nonActivePath = noteblock_passive__png_1.default;
         this.nowImage.src = this.activePath;
         this.soundPath = C_mp3_1.default;
+        this.inputPivot = [
+            { x: this.position.x - node_1.default.correction, y: this.position.y },
+        ];
+        this.outputPivot = [
+            { x: this.position.x + node_1.default.correction, y: this.position.y }
+        ];
+        node_1.default.startNode = this;
     }
 }
 exports.default = soundBlock1;

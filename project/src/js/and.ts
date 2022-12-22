@@ -34,30 +34,64 @@ class and implements interfaces.node{
     }
     inputCount: number = 2;
     click: Function = () => {
-        this.activeMenu = !this.activeMenu;
+        //console.log(interfaces.nodeid, this.id);
+        if(interfaces.nodeid != ""){
+            if(interfaces.nodeid == this.id){
+                interfaces.nodeid = "";
+            }
+            else
+            {
+                //console.log(this);
+                let t = interfaces.nodes[interfaces.nodeid];
+                // for(let i = 0; i < t.inputCount; i++)
+                // {
+                //     if(t.inputNode[i][0] == null){
+                //         t.inputNode[i][0] = this.id;\
+                //         this.nextNode.push([interfaces.nodeid,true]);
+                //         break;
+                //     }
+                // }
+                for(let i = 0; i < this.inputCount; i++)
+                {
+                    if(this.inputNode[i][0] == null){
+                        this.inputNode[i][0] = interfaces.nodeid;
+                        t.nextNode.push([this.id,true]);
+                        break;
+                    }
+                }
+                interfaces.nodeid = "";
+            }
+        }
+        else
+            this.activeMenu = !this.activeMenu;
     };
     activeMenu: boolean = false;
-    menuClick: Function = (x:number, y:number) => {
-        if(x > 5 && x < 40  &&  y > 5 && y < 25){
+
+       menuClick: Function = (x:number, y:number) => {
+        console.log(x,y);
+        if(x > 0 && x < 100  &&  y > 0 && y < 25){
             interfaces.nodeid=this.id;
         }
-        else if(x > 5 && x < 40  &&  y > 25 && y < 40){
+        else if(x > 0 && x < 100  &&  y > 25 && y < 70){
             this.inputNode.forEach(e => {
                 if(e[0]!=null)
                     interfaces.nodes[e[0]].nextNode.filter(e2 => {
                         return e2[0] != this.id;
                     });
             });
-            this.inputNode = [];
+            this.inputNode = [[null,true],[null,true]];
         }
+
     };
+
     menuDraw: Function = () => {
         this.context.beginPath()
         this.context.fillStyle = 'white';
-        this.context.fillRect(this.position.x,this.position.y,50,40);
-        this.context.fillStyle = 'blcak';
-        this.context.fillText("노드 연결",this.position.x+5, this.position.y+5);
-        this.context.fillText("연결 해제",this.position.x+5, this.position.y+25);
+        this.context.fillRect(this.position.x,this.position.y,100,70);
+        this.context.fillStyle = 'black';
+        this.context.font = '20px sans-serif';
+        this.context.fillText("노드 연결",this.position.x+5, this.position.y+20);
+        this.context.fillText("연결 해제",this.position.x+5, this.position.y+60);
     };
     drow: Function = () => {
         this.context.beginPath();
@@ -66,13 +100,16 @@ class and implements interfaces.node{
         for(let i = 0; i < this.inputCount; ++i){
             if(this.inputNode[i][0] == null) continue;
             let dstart = interfaces.nodes[this.inputNode[i][0] as string].outputPivot[0];
-            let endpoint = this.inputPivot[0];
-            
-            if(this.inputNode[i][1]) this.context.strokeStyle = 'red'
-            else this.context.strokeStyle = 'blue';
+            let endpoint = this.inputPivot[i];
 
+            //console.log(interfaces.nodes[this.inputNode[i][0] as string] === this);
+            
+            if(this.inputNode[i][1]) this.context.strokeStyle = 'red';
+            else this.context.strokeStyle = 'blue';
+            console.log(dstart,endpoint);
             this.context.moveTo(dstart.x, dstart.y);
-            this.context.lineTo(endpoint.x, endpoint.y)
+            this.context.lineTo(endpoint.x, endpoint.y);
+            this.context.stroke();
         }
         
         this.context.closePath();

@@ -14,23 +14,43 @@ class delay {
         this.outputPivot = [];
         this.inputCount = 1;
         this.click = () => {
-            this.activeMenu = !this.activeMenu;
+            console.log(node_1.default.nodeid, this.id);
+            if (node_1.default.nodeid != "") {
+                if (node_1.default.nodeid == this.id) {
+                    node_1.default.nodeid = "";
+                }
+                else {
+                    console.log(this);
+                    let t = node_1.default.nodes[node_1.default.nodeid];
+                    for (let i = 0; i < this.inputCount; i++) {
+                        if (this.inputNode[i][0] == null) {
+                            this.inputNode[i][0] = node_1.default.nodeid;
+                            t.nextNode.push([this.id, true]);
+                            break;
+                        }
+                    }
+                    node_1.default.nodeid = "";
+                }
+            }
+            else
+                this.activeMenu = !this.activeMenu;
         };
         this.activeMenu = false;
         this.menuClick = (x, y) => {
-            if (x > 5 && x < 40 && y > 5 && y < 25) {
+            console.log(x, y);
+            if (x > 0 && x < 100 && y > 0 && y < 25) {
                 node_1.default.nodeid = this.id;
             }
-            else if (x > 5 && x < 40 && y > 25 && y < 40) {
+            else if (x > 0 && x < 100 && y > 25 && y < 70) {
                 this.inputNode.forEach(e => {
                     if (e[0] != null)
                         node_1.default.nodes[e[0]].nextNode.filter(e2 => {
                             return e2[0] != this.id;
                         });
                 });
-                this.inputNode = [];
+                this.inputNode = [[null, true]];
             }
-            else if (x > 5 && x < 40 && y > 45 && y < 60) {
+            else if (x > 0 && x < 100 && y > 70 && y < 120) {
                 let temp = prompt("시간을 입력해주세요");
                 if (temp != null)
                     this.delay = Number.parseInt(temp);
@@ -39,11 +59,12 @@ class delay {
         this.menuDraw = () => {
             this.context.beginPath();
             this.context.fillStyle = 'white';
-            this.context.fillRect(this.position.x, this.position.y, 50, 80);
-            this.context.fillStyle = 'blcak';
-            this.context.fillText("노드 연결", this.position.x + 5, this.position.y + 5);
-            this.context.fillText("연결 해제", this.position.x + 5, this.position.y + 25);
-            this.context.fillText("시간 설정", this.position.x + 5, this.position.y + 45);
+            this.context.fillRect(this.position.x, this.position.y, 100, 120);
+            this.context.fillStyle = 'black';
+            this.context.font = '20px sans-serif';
+            this.context.fillText("노드 연결", this.position.x + 5, this.position.y + 20);
+            this.context.fillText("연결 해제", this.position.x + 5, this.position.y + 60);
+            this.context.fillText("시간 설정", this.position.x + 5, this.position.y + 100);
         };
         this.drow = () => {
             this.context.beginPath();
@@ -59,6 +80,7 @@ class delay {
                     this.context.strokeStyle = 'blue';
                 this.context.moveTo(dstart.x, dstart.y);
                 this.context.lineTo(endpoint.x, endpoint.y);
+                this.context.stroke();
             }
             this.context.closePath();
         };
@@ -68,12 +90,14 @@ class delay {
             this.nowImage.src = this.activePath;
             setTimeout(() => {
                 this.nextNode.forEach(e => {
-                    this.nowImage.src = this.nonActivePath;
-                    node_1.default.nodes[e[0]].inputNode.forEach(e2 => {
-                        if (e2[0] == this.id)
-                            e2[1] = true;
-                    });
-                    node_1.default.nodes[e[0]].play();
+                    if (e[0] != null) {
+                        this.nowImage.src = this.nonActivePath;
+                        node_1.default.nodes[e[0]].inputNode.forEach(e2 => {
+                            if (e2[0] == this.id)
+                                e2[1] = true;
+                        });
+                        node_1.default.nodes[e[0]].play();
+                    }
                 });
             }, this.delay);
         };
@@ -81,9 +105,11 @@ class delay {
         this.nowImage = new Image();
         this.activePath = delay_passive__png_1.default;
         this.nonActivePath = delay_Active__png_1.default;
+        this.nowImage.src = this.nonActivePath;
         this.context = ctx;
         this.position = { x, y };
         this.delay = 1000;
+        node_1.default.nodes[this.id] = this;
         this.inputPivot = [
             { x: this.position.x - node_1.default.correction, y: this.position.y },
         ];
