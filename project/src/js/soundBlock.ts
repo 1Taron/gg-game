@@ -8,7 +8,7 @@ class soundBlock implements interfaces.soundBlock{
     position: { x: number; y: number; };
     inputNode: [string|null, boolean][] = [[null,true]];
     nextNode: [string, boolean][] = [];
-    delay: number = 0.1;
+    delay: number = 100;
     activePath: string;
     nonActivePath: string;
     id:string;
@@ -50,12 +50,13 @@ class soundBlock implements interfaces.soundBlock{
             }
             break;
         }
-        this.nowImage.src = this.nonActivePath;
+        this.nowImage.src = this.activePath;
         setTimeout(() => {
             audio.pause();
             audio.src = "";
             this.nextNode.forEach(e=> {
                 if(e[0] != null){
+                    this.nowImage.src = this.nonActivePath;
                     interfaces.nodes[e[0]].inputNode.forEach(e2=>{
                         if(e2[0] == this.id) e2[1] = true;
                     });

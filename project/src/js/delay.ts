@@ -1,6 +1,6 @@
 import interfaces from "./node";
-import delayImage from "../image/딜레이(passive).png"
-import delayNImage from "../image/딜레이(Active).png"
+import delayNImage from "../image/딜레이(passive).png"
+import delayImage from "../image/딜레이(Active).png"
 
 
 
@@ -26,7 +26,6 @@ class delay implements interfaces.node{
         this.context = ctx;
         this.position = {x,y};
         this.delay = 1000;
-        
     }
 
     drow: Function = ()=>{
@@ -37,9 +36,10 @@ class delay implements interfaces.node{
     
     play: Function = ()=>{
         if(this.inputNode[0][1] == false) return;
-
+        this.nowImage.src = this.activePath;
         setTimeout(() => {
             this.nextNode.forEach(e=> {
+                this.nowImage.src = this.nonActivePath;
                 interfaces.nodes[e[0]].inputNode.forEach(e2=>{
                     if(e2[0] == this.id) e2[1] = true;
                 });
