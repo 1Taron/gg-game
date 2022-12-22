@@ -7,7 +7,6 @@ import interfaces from "./node";
 const continer = document.querySelector('#container') as HTMLDivElement;
 const canvas = document.querySelector('#continer') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-const audio = document.querySelector('#audio');
 
 canvas.width = continer.clientWidth;
 canvas.height = continer.clientHeight;

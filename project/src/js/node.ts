@@ -1,5 +1,6 @@
 namespace interfaces{
     export const correction:number = 50;
+    export const audioList = document.querySelectorAll('.audio');
     export interface node{
         id:string,
         position:{x:number, y:number},

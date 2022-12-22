@@ -23,5 +23,6 @@ class soundBlock implements interfaces.soundBlock{
     };
 
     play: Function = ()=>{
+        
     }
 }
