@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const node_1 = __importDefault(require("./node"));
 const ______Active__png_1 = __importDefault(require("../image/\uB178\uD2B8\uBE14\uB7ED (Active).png"));
 const ______passive__png_1 = __importDefault(require("../image/\uB178\uD2B8\uBE14\uB7ED (passive).png"));
-class soundBlock {
+class or {
     constructor(x, y, ctx) {
         this.inputNode = [[null, true]];
         this.nextNode = [];
@@ -70,3 +70,4 @@ class soundBlock {
         this.nowImage.src = this.activePath;
     }
 }
+exports.default = or;

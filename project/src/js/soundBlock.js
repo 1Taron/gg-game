@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const node_1 = __importDefault(require("./node"));
 const ______Active__png_1 = __importDefault(require("../image/\uB178\uD2B8\uBE14\uB7ED (Active).png"));
 const ______passive__png_1 = __importDefault(require("../image/\uB178\uD2B8\uBE14\uB7ED (passive).png"));
-class soundBlock {
+class soundBlock1 {
     constructor(x, y, ctx) {
         this.inputNode = [[null, true]];
         this.nextNode = [];
@@ -74,7 +74,7 @@ class soundBlock {
             else if (x > 5 && x < 40 && y > 65 && y < 80) {
                 let temp = prompt("피치를 입력해주세요");
                 if (temp != null)
-                    this.delay = Number.parseInt(temp);
+                    this.soundRate = Number.parseInt(temp);
             }
         };
         this.menuDraw = () => {
@@ -98,3 +98,4 @@ class soundBlock {
         this.soundPath = "./base/drum";
     }
 }
+exports.default = soundBlock1;

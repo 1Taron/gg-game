@@ -73,3 +73,4 @@ class delay {
         this.delay = 1000;
     }
 }
+exports.default = delay;

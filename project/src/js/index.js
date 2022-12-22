@@ -22,14 +22,30 @@ const AllDraw = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (const v of Object.values(node_1.default.nodes)) {
         v.drow();
+        if (v.activeMenu)
+            v.menuDraw();
     }
     if (nM.Active)
         nM.draw();
 };
 const nodeMenuEvent = (e) => {
     for (const v of Object.values(node_1.default.nodes)) {
-        let tx = e.clientX - v.position.x;
-        let ty = e.clientY - v.position.y;
+        let tx = e.clientX - v.position.x - node_1.default.correction;
+        let ty = e.clientY - v.position.y - node_1.default.correction;
+        if (tx > -50 && tx < 50 && ty > -50 && ty < 50) {
+            v.click();
+            return;
+        }
+        else if (v.activeMenu) {
+            v.menuClick(tx, ty);
+            v.activeMenu = false;
+            return;
+        }
+    }
+    if (nM.Active) {
+        let tx = e.clientX - nM.position.x;
+        let ty = e.clientY - nM.position.y;
+        nM.click(tx, ty);
     }
     nM.position = { x: e.clientX, y: e.clientY };
     nM.Active = !nM.Active;

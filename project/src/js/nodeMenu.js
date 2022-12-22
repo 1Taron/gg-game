@@ -4,6 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const nodeMenu_png_1 = __importDefault(require("../image/nodeMenu.png"));
+const soundBlock_1 = __importDefault(require("./soundBlock"));
+const delay_1 = __importDefault(require("./delay"));
 const nodeMenuImgElement = new Image();
 nodeMenuImgElement.src = nodeMenu_png_1.default;
 class nodeMenu {
@@ -21,6 +23,14 @@ class nodeMenu {
             this.ctx.drawImage(nodeMenuImgElement, this.position.x - 75, this.position.y - 75, dt, dt);
         };
         this.click = (x, y) => {
+            if (y > 60 && y < 96 && x > 4 && x > 40) {
+            }
+            else if (y > 41 && y < 81 && x > 52 && x < 81) {
+                new soundBlock_1.default(this.position.x, this.position.y, this.ctx);
+            }
+            else if (y > 9 && y < 37 && x > 63 && x < 91) {
+                new delay_1.default(this.position.x, this.position.y, this.ctx);
+            }
         };
         this.ctx = ctx;
     }
