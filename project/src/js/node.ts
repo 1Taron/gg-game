@@ -1,13 +1,21 @@
 namespace interfaces{
     export const correction:number = 50;
-    export const audioList = document.querySelectorAll('.audio') as NodeListOf<HTMLAudioElement>;
-    export const audioContext = new AudioContext();
+    export const audioList:Array<HTMLAudioElement> = [
+        document.createElement('audio'),
+        document.createElement('audio'),
+        document.createElement('audio'),
+        document.createElement('audio'),
+        document.createElement('audio'),
+        document.createElement('audio'),
+        document.createElement('audio'),
+        document.createElement('audio')
+    ];
     export interface node{
         id:string,
         position:{x:number, y:number},
         play:Function,
         inputNode:Array<[string|null,boolean]>,
-        nextNode:Array<[string,boolean]>,
+        nextNode:Array<[string|null,boolean]>,
         inputPivot:Array<{x:number,y:number}>,
         outputPivot:Array<{x:number,y:number}>,
         delay:number,
@@ -28,7 +36,7 @@ namespace interfaces{
         data:Array<[boolean]>
     }
 
-    export let nodes:{[key:string]:any} = {};
+    export let nodes:{[key:string]:node|soundBlock|register} = {};
 }
 
 export default interfaces;
