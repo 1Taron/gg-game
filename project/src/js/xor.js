@@ -10,43 +10,31 @@ class soundBlock {
     constructor(x, y, ctx) {
         this.inputNode = [[null, true]];
         this.nextNode = [];
-        this.delay = 0.1;
         this.inputPivot = [];
         this.outputPivot = [];
-        this.soundRate = 1;
+        this.delay = 0;
         this.drow = () => {
             this.context.beginPath();
             this.context.drawImage(this.nowImage, this.position.x - node_1.default.correction, this.position.y - node_1.default.correction);
             this.context.closePath();
         };
         this.play = () => {
-            if (this.inputNode[0][1] == false)
-                return;
-            let size = node_1.default.audioList.length;
-            let audio = node_1.default.audioList[0];
-            for (let i = 0; i < size; ++i) {
-                if (node_1.default.audioList[i].src == "") {
-                    audio = node_1.default.audioList[i];
-                    audio.playbackRate = this.soundRate;
-                    audio.src = this.soundPath;
-                    audio.play();
-                }
-                break;
+            let result = this.inputNode[0][1];
+            for (let i = 1; i < this.inputNode.length; ++i) {
+                if (this.inputNode[i][1] != result)
+                    result = true;
+                else
+                    result = false;
             }
-            this.nowImage.src = this.nonActivePath;
-            setTimeout(() => {
-                audio.pause();
-                audio.src = "";
-                this.nextNode.forEach(e => {
-                    if (e[0] != null) {
-                        node_1.default.nodes[e[0]].inputNode.forEach(e2 => {
-                            if (e2[0] == this.id)
-                                e2[1] = true;
-                        });
-                        node_1.default.nodes[e[0]].play();
-                    }
-                });
-            }, this.delay);
+            this.nextNode.forEach(e => {
+                if (e[0] != null) {
+                    node_1.default.nodes[e[0]].inputNode.forEach(e2 => {
+                        if (e2[0] == this.id)
+                            e2[1] = result;
+                    });
+                    node_1.default.nodes[e[0]].play();
+                }
+            });
         };
         this.id = crypto.randomUUID();
         node_1.default.nodes[this.id] = this;
@@ -56,6 +44,5 @@ class soundBlock {
         this.activePath = ______passive__png_1.default;
         this.nonActivePath = ______Active__png_1.default;
         this.nowImage.src = this.activePath;
-        this.soundPath = "./base/drum";
     }
 }

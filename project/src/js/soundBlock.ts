@@ -49,15 +49,18 @@ class soundBlock implements interfaces.soundBlock{
                 audio.play();
             }
             break;
-        }   
+        }
+        this.nowImage.src = this.nonActivePath;
         setTimeout(() => {
             audio.pause();
             audio.src = "";
             this.nextNode.forEach(e=> {
-                interfaces.nodes[e[0]].inputNode.forEach(e2=>{
-                    if(e2[0] == this.id) e2[1] = true;
-                });
-                interfaces.nodes[e[0]].play();
+                if(e[0] != null){
+                    interfaces.nodes[e[0]].inputNode.forEach(e2=>{
+                        if(e2[0] == this.id) e2[1] = true;
+                    });
+                    interfaces.nodes[e[0]].play();
+                }
             });
         }, this.delay);
     }
