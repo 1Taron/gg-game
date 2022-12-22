@@ -1,13 +1,25 @@
+html{
+    padding:0;
+    margin: 0;
+}
+
 body{
-    background-color: powderblue;
-   color: tomato; 
+    height: 100vh;
+    padding: 0;
+    margin: 0;
 }
 
-.h1{
-    background-color: aqua;
-
+#container{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-#loadModule{
-    color: purple;
+#canvas{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: beige;
 }
