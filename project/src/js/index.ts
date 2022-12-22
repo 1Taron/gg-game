@@ -9,7 +9,7 @@ import nodeMenu from "./nodeMenu";
 
 
 const continer = document.querySelector('#container') as HTMLDivElement;
-const canvas = document.querySelector('#continer') as HTMLCanvasElement;
+const canvas = document.querySelector('#canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 const nM = new nodeMenu(ctx);
 

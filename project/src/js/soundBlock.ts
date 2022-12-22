@@ -24,8 +24,8 @@ class soundBlock1 implements interfaces.soundBlock{
         this.position = {x, y};
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = soundBlockNImage;
-        this.nonActivePath = soundBlockAImage;
+        this.activePath = soundBlockAImage;
+        this.nonActivePath = soundBlockNImage;
         this.nowImage.src = this.activePath;
         this.soundPath = C;
     }

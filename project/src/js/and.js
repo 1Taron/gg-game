@@ -78,8 +78,8 @@ class and {
         this.position = { x, y };
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = and_png_2.default;
-        this.nonActivePath = and_png_1.default;
+        this.activePath = and_png_1.default;
+        this.nonActivePath = and_png_2.default;
         this.nowImage.src = this.activePath;
         this.inputPivot = [
             { x: this.position.x - node_1.default.correction, y: this.position.y + 20 },

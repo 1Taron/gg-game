@@ -73,8 +73,8 @@ class not {
         this.position = { x, y };
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = noteblock_passive__png_1.default;
-        this.nonActivePath = not_png_1.default;
+        this.activePath = not_png_1.default;
+        this.nonActivePath = noteblock_passive__png_1.default;
         this.nowImage.src = this.activePath;
         this.inputPivot = [
             { x: this.position.x - node_1.default.correction, y: this.position.y }

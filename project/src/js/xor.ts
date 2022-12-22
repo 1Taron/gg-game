@@ -21,7 +21,7 @@ class xor implements interfaces.node{
         this.position = {x, y};
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = BlockNImage;
+        this.activePath = BlockAImage;
         this.nonActivePath = BlockAImage;
         this.nowImage.src = this.activePath;
         this.inputPivot = [

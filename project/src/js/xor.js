@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_1 = __importDefault(require("./node"));
 const Xor_png_1 = __importDefault(require("../image/Xor.png"));
-const Xor_png_2 = __importDefault(require("../image/Xor.png"));
 class xor {
     constructor(x, y, ctx) {
         this.inputNode = [[null, true]];
@@ -80,7 +79,7 @@ class xor {
         this.position = { x, y };
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = Xor_png_2.default;
+        this.activePath = Xor_png_1.default;
         this.nonActivePath = Xor_png_1.default;
         this.nowImage.src = this.activePath;
         this.inputPivot = [

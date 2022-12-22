@@ -21,8 +21,8 @@ class and implements interfaces.node{
         this.position = {x, y};
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = BlockNImage;
-        this.nonActivePath = BlockAImage;
+        this.activePath = BlockAImage;
+        this.nonActivePath = BlockNImage;
         this.nowImage.src = this.activePath;
         this.inputPivot = [
             {x:this.position.x-interfaces.correction, y:this.position.y+20},
@@ -72,7 +72,7 @@ class and implements interfaces.node{
             else this.context.strokeStyle = 'blue';
 
             this.context.moveTo(dstart.x, dstart.y);
-            this.context.lineTo(endpoint.x, endpoint.y);
+            this.context.lineTo(endpoint.x, endpoint.y)
         }
         
         this.context.closePath();

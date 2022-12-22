@@ -21,8 +21,8 @@ class or implements interfaces.node{
         this.position = {x, y};
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = BlockNImage;
-        this.nonActivePath = BlockAImage;
+        this.activePath = BlockAImage;
+        this.nonActivePath = BlockNImage;
         this.nowImage.src = this.activePath;
         this.inputPivot = [
             {x:this.position.x-interfaces.correction, y:this.position.y+20},

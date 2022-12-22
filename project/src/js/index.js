@@ -11,7 +11,7 @@ const nodeMenu_1 = __importDefault(require("./nodeMenu"));
 //import C from "../image/C.mp3";
 //
 const continer = document.querySelector('#container');
-const canvas = document.querySelector('#continer');
+const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 const nM = new nodeMenu_1.default(ctx);
 canvas.width = continer.clientWidth;

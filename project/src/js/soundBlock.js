@@ -106,8 +106,8 @@ class soundBlock1 {
         this.position = { x, y };
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = noteblock_passive__png_1.default;
-        this.nonActivePath = noteblock_Active__png_1.default;
+        this.activePath = noteblock_Active__png_1.default;
+        this.nonActivePath = noteblock_passive__png_1.default;
         this.nowImage.src = this.activePath;
         this.soundPath = C_mp3_1.default;
     }
