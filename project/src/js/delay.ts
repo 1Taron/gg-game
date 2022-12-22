@@ -26,7 +26,14 @@ class delay implements interfaces.node{
         this.context = ctx;
         this.position = {x,y};
         this.delay = 1000;
+        this.inputPivot = [
+            {x:this.position.x-interfaces.correction, y:this.position.y},
+        ]
+        this.outputPivot = [
+            {x:this.position.x+interfaces.correction, y:this.position.y}
+        ]
     }
+    inputCount: number = 1;
     click: Function = () => {
         this.activeMenu = !this.activeMenu;
     };
@@ -63,6 +70,17 @@ class delay implements interfaces.node{
     drow: Function = () => {
         this.context.beginPath();
         this.context.drawImage(this.nowImage, this.position.x-interfaces.correction, this.position.y-interfaces.correction);
+        for(let i = 0; i < this.inputCount; ++i){
+            if(this.inputNode[i][0] == null) continue;
+            let dstart = interfaces.nodes[this.inputNode[i][0] as string].outputPivot[0];
+            let endpoint = this.inputPivot[0];
+            
+            if(this.inputNode[i][1]) this.context.strokeStyle = 'red'
+            else this.context.strokeStyle = 'blue';
+
+            this.context.moveTo(dstart.x, dstart.y);
+            this.context.lineTo(endpoint.x, endpoint.y);
+        }
         this.context.closePath();
     }
     

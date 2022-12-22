@@ -18,6 +18,7 @@ namespace interfaces{
         inputNode:Array<[string|null,boolean]>,
         nextNode:Array<[string|null,boolean]>,
         inputPivot:Array<{x:number,y:number}>,
+        inputCount:number,
         outputPivot:Array<{x:number,y:number}>,
         delay:number,
         drow:Function,

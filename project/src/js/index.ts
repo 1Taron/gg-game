@@ -3,15 +3,10 @@ import img from "../image/ic_launcher.png";
 import index from "../html/index.html";
 import interfaces from "./node";
 import nodeMenu from "./nodeMenu";
-import delayA from "../image/delayA.png";
-import delayB from "../imgae/delay(passive).png";
-import C from "../image/C.mp3";
-import nodeMenu2 from "../image/nodeMenu2.png";
-import not from "../image/not.png";
-import noteblockA from "../image/noteblock(Active).png";
-import noteblockB from "../image/noteblock(passive).png";
-import or from "../image/or.png";
-import Xor from "../image/Xor.png";
+
+//import C from "../image/C.mp3";
+//
+
 
 const continer = document.querySelector('#container') as HTMLDivElement;
 const canvas = document.querySelector('#continer') as HTMLCanvasElement;
@@ -37,8 +32,8 @@ const AllDraw:() => void = () => {
 
 const nodeMenuEvent:(e:MouseEvent) => void = (e:MouseEvent) => {
     for(const v of Object.values(interfaces.nodes)){
-        let tx:number = e.clientX - v.position.x - interfaces.correction;
-        let ty:number = e.clientY - v.position.y - interfaces.correction;
+        let tx:number = e.clientX - v.position.x;
+        let ty:number = e.clientY - v.position.y;
 
         if(tx > -50 && tx < 50 && ty > -50 && ty < 50){
             v.click();

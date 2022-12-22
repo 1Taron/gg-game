@@ -5,7 +5,7 @@ import BlockNImage from "../image/and.png"
 class and implements interfaces.node{
     id: string;
     position: { x: number; y: number; };
-    inputNode: [string | null, boolean][] = [[null, true]];
+    inputNode: [string | null, boolean][] = [[null, true],[null, true]];
     nextNode: [string | null, boolean][] = [];
     inputPivot: { x: number; y: number; }[] = [];
     outputPivot: { x: number; y: number; }[] = [];
@@ -24,7 +24,15 @@ class and implements interfaces.node{
         this.activePath = BlockNImage;
         this.nonActivePath = BlockAImage;
         this.nowImage.src = this.activePath;
+        this.inputPivot = [
+            {x:this.position.x-interfaces.correction, y:this.position.y+20},
+            {x:this.position.x-interfaces.correction, y:this.position.y-20}
+        ]
+        this.outputPivot = [
+            {x:this.position.x+interfaces.correction, y:this.position.y}
+        ]
     }
+    inputCount: number = 2;
     click: Function = () => {
         this.activeMenu = !this.activeMenu;
     };
@@ -54,6 +62,19 @@ class and implements interfaces.node{
     drow: Function = () => {
         this.context.beginPath();
         this.context.drawImage(this.nowImage, this.position.x-interfaces.correction, this.position.y-interfaces.correction);
+
+        for(let i = 0; i < this.inputCount; ++i){
+            if(this.inputNode[i][0] == null) continue;
+            let dstart = interfaces.nodes[this.inputNode[i][0] as string].outputPivot[0];
+            let endpoint = this.inputPivot[0];
+            
+            if(this.inputNode[i][1]) this.context.strokeStyle = 'red'
+            else this.context.strokeStyle = 'blue';
+
+            this.context.moveTo(dstart.x, dstart.y);
+            this.context.lineTo(endpoint.x, endpoint.y);
+        }
+        
         this.context.closePath();
     }
     play: Function = () => {

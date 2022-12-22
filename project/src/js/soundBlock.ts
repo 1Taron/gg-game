@@ -27,13 +27,25 @@ class soundBlock1 implements interfaces.soundBlock{
         this.activePath = soundBlockNImage;
         this.nonActivePath = soundBlockAImage;
         this.nowImage.src = this.activePath;
-        this.soundPath = "./base/drum";
+        this.soundPath = C;
     }
+    inputCount: number = 1;
 
 
     drow: Function = ()=>{
         this.context.beginPath();
         this.context.drawImage(this.nowImage, this.position.x-interfaces.correction, this.position.y-interfaces.correction);
+        for(let i = 0; i < this.inputCount; ++i){
+            if(this.inputNode[i][0] == null) continue;
+            let dstart = interfaces.nodes[this.inputNode[i][0] as string].outputPivot[0];
+            let endpoint = this.inputPivot[0];
+            
+            if(this.inputNode[i][1]) this.context.strokeStyle = 'red'
+            else this.context.strokeStyle = 'blue';
+
+            this.context.moveTo(dstart.x, dstart.y);
+            this.context.lineTo(endpoint.x, endpoint.y);
+        }
         this.context.closePath();
     };
 

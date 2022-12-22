@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const node_1 = __importDefault(require("./node"));
 const noteblock_Active__png_1 = __importDefault(require("../image/noteblock(Active).png"));
 const noteblock_passive__png_1 = __importDefault(require("../image/noteblock(passive).png"));
+const C_mp3_1 = __importDefault(require("../image/C.mp3"));
 class soundBlock1 {
     constructor(x, y, ctx) {
         this.inputNode = [[null, true]];
@@ -14,9 +15,22 @@ class soundBlock1 {
         this.inputPivot = [];
         this.outputPivot = [];
         this.soundRate = 1;
+        this.inputCount = 1;
         this.drow = () => {
             this.context.beginPath();
             this.context.drawImage(this.nowImage, this.position.x - node_1.default.correction, this.position.y - node_1.default.correction);
+            for (let i = 0; i < this.inputCount; ++i) {
+                if (this.inputNode[i][0] == null)
+                    continue;
+                let dstart = node_1.default.nodes[this.inputNode[i][0]].outputPivot[0];
+                let endpoint = this.inputPivot[0];
+                if (this.inputNode[i][1])
+                    this.context.strokeStyle = 'red';
+                else
+                    this.context.strokeStyle = 'blue';
+                this.context.moveTo(dstart.x, dstart.y);
+                this.context.lineTo(endpoint.x, endpoint.y);
+            }
             this.context.closePath();
         };
         this.play = () => {
@@ -95,7 +109,7 @@ class soundBlock1 {
         this.activePath = noteblock_passive__png_1.default;
         this.nonActivePath = noteblock_Active__png_1.default;
         this.nowImage.src = this.activePath;
-        this.soundPath = "./base/drum";
+        this.soundPath = C_mp3_1.default;
     }
 }
 exports.default = soundBlock1;

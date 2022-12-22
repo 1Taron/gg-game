@@ -8,11 +8,12 @@ const and_png_1 = __importDefault(require("../image/and.png"));
 const and_png_2 = __importDefault(require("../image/and.png"));
 class and {
     constructor(x, y, ctx) {
-        this.inputNode = [[null, true]];
+        this.inputNode = [[null, true], [null, true]];
         this.nextNode = [];
         this.inputPivot = [];
         this.outputPivot = [];
         this.delay = 0;
+        this.inputCount = 2;
         this.click = () => {
             this.activeMenu = !this.activeMenu;
         };
@@ -42,6 +43,18 @@ class and {
         this.drow = () => {
             this.context.beginPath();
             this.context.drawImage(this.nowImage, this.position.x - node_1.default.correction, this.position.y - node_1.default.correction);
+            for (let i = 0; i < this.inputCount; ++i) {
+                if (this.inputNode[i][0] == null)
+                    continue;
+                let dstart = node_1.default.nodes[this.inputNode[i][0]].outputPivot[0];
+                let endpoint = this.inputPivot[0];
+                if (this.inputNode[i][1])
+                    this.context.strokeStyle = 'red';
+                else
+                    this.context.strokeStyle = 'blue';
+                this.context.moveTo(dstart.x, dstart.y);
+                this.context.lineTo(endpoint.x, endpoint.y);
+            }
             this.context.closePath();
         };
         this.play = () => {
@@ -68,6 +81,13 @@ class and {
         this.activePath = and_png_2.default;
         this.nonActivePath = and_png_1.default;
         this.nowImage.src = this.activePath;
+        this.inputPivot = [
+            { x: this.position.x - node_1.default.correction, y: this.position.y + 20 },
+            { x: this.position.x - node_1.default.correction, y: this.position.y - 20 }
+        ];
+        this.outputPivot = [
+            { x: this.position.x + node_1.default.correction, y: this.position.y }
+        ];
     }
 }
 exports.default = and;

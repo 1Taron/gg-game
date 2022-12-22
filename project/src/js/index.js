@@ -8,6 +8,8 @@ const ic_launcher_png_1 = __importDefault(require("../image/ic_launcher.png"));
 const index_html_1 = __importDefault(require("../html/index.html"));
 const node_1 = __importDefault(require("./node"));
 const nodeMenu_1 = __importDefault(require("./nodeMenu"));
+//import C from "../image/C.mp3";
+//
 const continer = document.querySelector('#container');
 const canvas = document.querySelector('#continer');
 const ctx = canvas.getContext('2d');
@@ -30,8 +32,8 @@ const AllDraw = () => {
 };
 const nodeMenuEvent = (e) => {
     for (const v of Object.values(node_1.default.nodes)) {
-        let tx = e.clientX - v.position.x - node_1.default.correction;
-        let ty = e.clientY - v.position.y - node_1.default.correction;
+        let tx = e.clientX - v.position.x;
+        let ty = e.clientY - v.position.y;
         if (tx > -50 && tx < 50 && ty > -50 && ty < 50) {
             v.click();
             return;

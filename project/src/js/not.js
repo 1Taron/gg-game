@@ -13,9 +13,22 @@ class not {
         this.inputPivot = [];
         this.outputPivot = [];
         this.delay = 0;
+        this.inputCount = 1;
         this.drow = () => {
             this.context.beginPath();
             this.context.drawImage(this.nowImage, this.position.x - node_1.default.correction, this.position.y - node_1.default.correction);
+            for (let i = 0; i < this.inputCount; ++i) {
+                if (this.inputNode[i][0] == null)
+                    continue;
+                let dstart = node_1.default.nodes[this.inputNode[i][0]].outputPivot[0];
+                let endpoint = this.inputPivot[0];
+                if (this.inputNode[i][1])
+                    this.context.strokeStyle = 'red';
+                else
+                    this.context.strokeStyle = 'blue';
+                this.context.moveTo(dstart.x, dstart.y);
+                this.context.lineTo(endpoint.x, endpoint.y);
+            }
             this.context.closePath();
         };
         this.play = () => {
@@ -63,6 +76,12 @@ class not {
         this.activePath = noteblock_passive__png_1.default;
         this.nonActivePath = not_png_1.default;
         this.nowImage.src = this.activePath;
+        this.inputPivot = [
+            { x: this.position.x - node_1.default.correction, y: this.position.y }
+        ];
+        this.outputPivot = [
+            { x: this.position.x + node_1.default.correction, y: this.position.y }
+        ];
     }
 }
 exports.default = not;
