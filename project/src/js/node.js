@@ -14,5 +14,8 @@ var interfaces;
         document.createElement('audio')
     ];
     interfaces.nodes = {};
+    class MenuUI {
+    }
+    interfaces.MenuUI = MenuUI;
 })(interfaces || (interfaces = {}));
 exports.default = interfaces;

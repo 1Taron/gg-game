@@ -1,5 +1,6 @@
 namespace interfaces{
     export const correction:number = 50;
+    export let nodeid:string;
     export const audioList:Array<HTMLAudioElement> = [
         document.createElement('audio'),
         document.createElement('audio'),
@@ -22,6 +23,11 @@ namespace interfaces{
         drow:Function,
         context:CanvasRenderingContext2D,
 
+        click:Function,
+        activeMenu:boolean,
+        menuClick:Function,
+        menuDraw:Function,
+
         nowImage:HTMLImageElement,
         activePath:string,
         nonActivePath:string
@@ -37,6 +43,10 @@ namespace interfaces{
     }
 
     export let nodes:{[key:string]:node|soundBlock|register} = {};
+
+    export class MenuUI{
+
+    }
 }
 
 export default interfaces;

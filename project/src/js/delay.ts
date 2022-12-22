@@ -27,12 +27,44 @@ class delay implements interfaces.node{
         this.position = {x,y};
         this.delay = 1000;
     }
+    click: Function = () => {
+        this.activeMenu = !this.activeMenu;
+    };
+    activeMenu: boolean = false;
 
-    drow: Function = ()=>{
+    menuClick: Function = (x:number, y:number) => {
+        if(x > 5 && x < 40  &&  y > 5 && y < 25){
+            interfaces.nodeid=this.id;
+        }
+        else if(x > 5 && x < 40  &&  y > 25 && y < 40){
+            this.inputNode.forEach(e => {
+                if(e[0]!=null)
+                    interfaces.nodes[e[0]].nextNode.filter(e2 => {
+                        return e2[0] != this.id;
+                    });
+            });
+            this.inputNode = [];
+        }
+        else if(x > 5 && x < 40  &&  y > 45 && y < 60){
+            let temp = prompt("시간을 입력해주세요");
+            if(temp != null)
+                this.delay = Number.parseInt(temp);
+        }
+    };
+    menuDraw: Function = () => {
+        this.context.beginPath()
+        this.context.fillStyle = 'white';
+        this.context.fillRect(this.position.x,this.position.y,50,80);
+        this.context.fillStyle = 'blcak';
+        this.context.fillText("노드 연결",this.position.x+5, this.position.y+5);
+        this.context.fillText("연결 해제",this.position.x+5, this.position.y+25);
+        this.context.fillText("시간 설정",this.position.x+5, this.position.y+45);
+    };
+    drow: Function = () => {
         this.context.beginPath();
         this.context.drawImage(this.nowImage, this.position.x-interfaces.correction, this.position.y-interfaces.correction);
         this.context.closePath();
-    };
+    }
     
     play: Function = ()=>{
         if(this.inputNode[0][1] == false) return;
@@ -48,6 +80,6 @@ class delay implements interfaces.node{
         }, this.delay);
 
     }
-
-        
 }
+
+export default delay;
