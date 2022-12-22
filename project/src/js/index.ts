@@ -51,10 +51,12 @@ const nodeMenuEvent:(e:MouseEvent) => void = (e:MouseEvent) => {
         let ty:number = e.clientY - nM.position.y;
         nM.click(tx,ty);
     }
+    else{
+        nM.position = {x:e.clientX, y:e.clientY};
+        nM.Active = !nM.Active;
+        nM.setTime();
+    }
 
-    nM.position = {x:e.clientX, y:e.clientY};
-    nM.Active = !nM.Active;
-    nM.setTime();
     
 }
 
