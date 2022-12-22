@@ -1,6 +1,6 @@
 namespace interfaces{
     export const correction:number = 50;
-    export const audioList = document.querySelectorAll('.audio');
+    export const audioList = [new AudioContext(),new AudioContext(),new AudioContext(),new AudioContext(),new AudioContext(),new AudioContext(),new AudioContext(),new AudioContext()];
     export interface node{
         id:string,
         position:{x:number, y:number},
@@ -13,19 +13,22 @@ namespace interfaces{
         drow:Function,
         context:CanvasRenderingContext2D,
 
-        nowImage:ImageBitmap,
+        nowImage:HTMLImageElement,
         activePath:string,
         nonActivePath:string
     }
     
     export interface soundBlock extends node {
         soundPath:string,
-        soundFrequency:number
+        soundRate:number,
+        sound:AudioBuffer
     }
 
     export interface register extends node{
         data:Array<[boolean]>
     }
+
+    export let nodes:{[key:string]:any} = {};
 }
 
 export default interfaces;
