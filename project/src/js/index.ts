@@ -11,6 +11,9 @@ const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 canvas.width = continer.clientWidth;
 canvas.height = continer.clientHeight;
 
-
+interfaces.audioList.forEach(e => {
+    e.loop = true;
+    e.preservesPitch = false;
+});
 
 console.log(css, img, index);
