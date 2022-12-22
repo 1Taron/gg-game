@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_1 = __importDefault(require("./node"));
-const ______Active__png_1 = __importDefault(require("../image/\uB178\uD2B8\uBE14\uB7ED (Active).png"));
-const ______passive__png_1 = __importDefault(require("../image/\uB178\uD2B8\uBE14\uB7ED (passive).png"));
+const and_png_1 = __importDefault(require("../image/and.png"));
+const and_png_2 = __importDefault(require("../image/and.png"));
 class and {
     constructor(x, y, ctx) {
         this.inputNode = [[null, true]];
@@ -65,8 +65,8 @@ class and {
         this.position = { x, y };
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = ______passive__png_1.default;
-        this.nonActivePath = ______Active__png_1.default;
+        this.activePath = and_png_2.default;
+        this.nonActivePath = and_png_1.default;
         this.nowImage.src = this.activePath;
     }
 }

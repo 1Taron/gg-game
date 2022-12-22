@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_1 = __importDefault(require("./node"));
-const ______Active__png_1 = __importDefault(require("../image/\uB178\uD2B8\uBE14\uB7ED (Active).png"));
-const ______passive__png_1 = __importDefault(require("../image/\uB178\uD2B8\uBE14\uB7ED (passive).png"));
+const noteblock_Active__png_1 = __importDefault(require("../image/noteblock(Active).png"));
+const noteblock_passive__png_1 = __importDefault(require("../image/noteblock(passive).png"));
 class soundBlock1 {
     constructor(x, y, ctx) {
         this.inputNode = [[null, true]];
@@ -92,8 +92,8 @@ class soundBlock1 {
         this.position = { x, y };
         this.context = ctx;
         this.nowImage = new Image();
-        this.activePath = ______passive__png_1.default;
-        this.nonActivePath = ______Active__png_1.default;
+        this.activePath = noteblock_passive__png_1.default;
+        this.nonActivePath = noteblock_Active__png_1.default;
         this.nowImage.src = this.activePath;
         this.soundPath = "./base/drum";
     }

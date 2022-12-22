@@ -1,6 +1,7 @@
 import interfaces from "./node";
-import soundBlockAImage from "../image/노트블럭 (Active).png"
-import soundBlockNImage from "../image/노트블럭 (passive).png"
+import soundBlockAImage from "../image/noteblock(Active).png";
+import soundBlockNImage from "../image/noteblock(passive).png";
+import C from "../image/C.mp3";
 
 class soundBlock1 implements interfaces.soundBlock{
     nowImage: HTMLImageElement;

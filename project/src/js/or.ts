@@ -1,6 +1,6 @@
 import interfaces from "./node";
-import BlockAImage from "../image/노트블럭 (Active).png"
-import BlockNImage from "../image/노트블럭 (passive).png"
+import BlockAImage from "../image/or.png"
+import BlockNImage from "../image/or.png"
 
 class or implements interfaces.node{
     id: string;

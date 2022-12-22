@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_1 = __importDefault(require("./node"));
-const ____passive__png_1 = __importDefault(require("../image/\uB51C\uB808\uC774(passive).png"));
-const ____Active__png_1 = __importDefault(require("../image/\uB51C\uB808\uC774(Active).png"));
+const delay_passive__png_1 = __importDefault(require("../image/delay(passive).png"));
+const delay_Active__png_1 = __importDefault(require("../image/delay(Active).png"));
 class delay {
     constructor(x, y, ctx) {
         this.inputNode = [[null, true]];
@@ -66,8 +66,8 @@ class delay {
         };
         this.id = crypto.randomUUID();
         this.nowImage = new Image();
-        this.activePath = ____passive__png_1.default;
-        this.nonActivePath = ____Active__png_1.default;
+        this.activePath = delay_passive__png_1.default;
+        this.nonActivePath = delay_Active__png_1.default;
         this.context = ctx;
         this.position = { x, y };
         this.delay = 1000;

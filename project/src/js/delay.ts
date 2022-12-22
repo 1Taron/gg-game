@@ -1,6 +1,6 @@
 import interfaces from "./node";
-import delayNImage from "../image/딜레이(passive).png"
-import delayImage from "../image/딜레이(Active).png"
+import delayNImage from "../image/delay(passive).png"
+import delayImage from "../image/delay(Active).png"
 
 
 

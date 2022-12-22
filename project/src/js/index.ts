@@ -3,6 +3,15 @@ import img from "../image/ic_launcher.png";
 import index from "../html/index.html";
 import interfaces from "./node";
 import nodeMenu from "./nodeMenu";
+import delayA from "../image/delayA.png";
+import delayB from "../imgae/delay(passive).png";
+import C from "../image/C.mp3";
+import nodeMenu2 from "../image/nodeMenu2.png";
+import not from "../image/not.png";
+import noteblockA from "../image/noteblock(Active).png";
+import noteblockB from "../image/noteblock(passive).png";
+import or from "../image/or.png";
+import Xor from "../image/Xor.png";
 
 const continer = document.querySelector('#container') as HTMLDivElement;
 const canvas = document.querySelector('#continer') as HTMLCanvasElement;
