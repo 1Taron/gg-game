@@ -11,7 +11,7 @@ class soundBlock1 {
     constructor(x, y, ctx) {
         this.inputNode = [[null, true]];
         this.nextNode = [];
-        this.delay = 100;
+        this.delay = 1000;
         this.inputPivot = [];
         this.outputPivot = [];
         this.soundRate = 1;
@@ -37,24 +37,30 @@ class soundBlock1 {
         this.play = () => {
             if (this.inputNode[0][1] == false)
                 return;
+            console.log("지나가요");
             let size = node_1.default.audioList.length;
             let audio = node_1.default.audioList[0];
             for (let i = 0; i < size; ++i) {
-                if (node_1.default.audioList[i].src == "") {
+                console.log(node_1.default.audioList[i]);
+                console.log(node_1.default.audioList[i].src);
+                console.log(i);
+                if (node_1.default.audioList[i].paused) {
                     audio = node_1.default.audioList[i];
-                    audio.playbackRate = this.soundRate;
                     audio.src = this.soundPath;
+                    audio.playbackRate = this.soundRate;
+                    console.log("사운드 레이트:  " + this.soundRate);
+                    console.log("오디오 레이트:  " + audio.playbackRate);
+                    //audio.preservesPitch = false;
                     audio.play();
+                    break;
                 }
-                break;
             }
             this.nowImage.src = this.activePath;
             setTimeout(() => {
                 audio.pause();
-                audio.src = "";
+                audio.currentTime = 0;
                 this.nextNode.forEach(e => {
                     if (e[0] != null) {
-                        this.nowImage.src = this.nonActivePath;
                         node_1.default.nodes[e[0]].inputNode.forEach(e2 => {
                             if (e2[0] == this.id)
                                 e2[1] = true;
@@ -62,6 +68,7 @@ class soundBlock1 {
                         node_1.default.nodes[e[0]].play();
                     }
                 });
+                this.nowImage.src = this.nonActivePath;
             }, this.delay);
         };
         this.click = () => {

@@ -9,7 +9,7 @@ class soundBlock1 implements interfaces.soundBlock{
     position: { x: number; y: number; };
     inputNode: [string|null, boolean][] = [[null,true]];
     nextNode: [string, boolean][] = [];
-    delay: number = 100;
+    delay: number = 1000;
     activePath: string;
     nonActivePath: string;
     id:string;
@@ -60,31 +60,39 @@ class soundBlock1 implements interfaces.soundBlock{
 
     play: Function = ()=>{
         if(this.inputNode[0][1] == false) return;
-
+        console.log("지나가요");
         let size = interfaces.audioList.length;
         let audio:HTMLAudioElement = interfaces.audioList[0];
         for(let i = 0; i < size; ++i){
-            if(interfaces.audioList[i].src == ""){
+            console.log(interfaces.audioList[i]);
+            console.log(interfaces.audioList[i].src);
+            console.log(i);
+            if(interfaces.audioList[i].paused){
                 audio = interfaces.audioList[i];
-                audio.playbackRate = this.soundRate;
                 audio.src = this.soundPath;
+                audio.playbackRate = this.soundRate;
+                console.log("사운드 레이트:  "+this.soundRate);
+                console.log("오디오 레이트:  "+audio.playbackRate);
+                //audio.preservesPitch = false;
+                
                 audio.play();
+                break;
             }
-            break;
+            
         }
         this.nowImage.src = this.activePath;
         setTimeout(() => {
             audio.pause();
-            audio.src = "";
+            audio.currentTime = 0;
             this.nextNode.forEach(e=> {
                 if(e[0] != null){
-                    this.nowImage.src = this.nonActivePath;
                     interfaces.nodes[e[0]].inputNode.forEach(e2=>{
                         if(e2[0] == this.id) e2[1] = true;
                     });
                     interfaces.nodes[e[0]].play();
                 }
             });
+            this.nowImage.src = this.nonActivePath;
         }, this.delay);
     }
 
